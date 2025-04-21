@@ -3,27 +3,25 @@ package files
 import (
 	"bytes"
 	"fmt"
+	"image"
 	jpeg "image/jpeg"
-	"imagery/concurrent"
 	"os"
 )
 
-func Open(path string) {
-	reader, err := os.Open("C:/Users/Usuario/Documents/golang/imagery/examples/fons-heijnsbroek.jpg")
+func Open(path string) (image.Image, error) {
+	reader, err := os.Open(path)
 	if err != nil {
 		fmt.Println("opening: ", err)
+		return nil, err
 	}
 	defer reader.Close()
 
-	m, err := jpeg.Decode(reader)
-	if err != nil {
-		fmt.Println(err)
-	}
+	return jpeg.Decode(reader)
+}
 
-	img := concurrent.Run(m)
-
+func Save(jpg *image.RGBA) {
 	var buff bytes.Buffer
-	jpeg.Encode(&buff, img, &jpeg.Options{Quality: 100})
+	jpeg.Encode(&buff, jpg, &jpeg.Options{Quality: 100})
 
 	os.WriteFile("./test.jpeg", buff.Bytes(), 0666)
 }
