@@ -19,9 +19,9 @@ func Open(path string) (image.Image, error) {
 	return jpeg.Decode(reader)
 }
 
-func Save(jpg *image.RGBA) {
+func Save(jpg *image.RGBA, saveName string) {
 	var buff bytes.Buffer
 	jpeg.Encode(&buff, jpg, &jpeg.Options{Quality: 100})
 
-	os.WriteFile("./test.jpeg", buff.Bytes(), 0666)
+	os.WriteFile(saveName, buff.Bytes(), 0666)
 }
