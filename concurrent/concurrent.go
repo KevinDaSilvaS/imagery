@@ -1,7 +1,6 @@
 package concurrent
 
 import (
-	"fmt"
 	"image"
 	"imagery/transformations"
 	"sync"
@@ -27,6 +26,6 @@ func Run(originalImage image.Image, opts transformations.TransformationOptions, 
 
 func runner(wg *sync.WaitGroup, params transformations.TransformationParams, transformation func(params transformations.TransformationParams)) {
 	defer wg.Done()
-	fmt.Println("Goroutine:: ", params.Line)
+	//fmt.Println("Goroutine:: ", params.Line)
 	transformation(params)
 }
