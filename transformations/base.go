@@ -3,7 +3,7 @@ package transformations
 import "image"
 
 type TransformationOptions struct {
-	MaskSize   uint8
+	MaskSize   int
 	Multiplier uint8
 }
 
