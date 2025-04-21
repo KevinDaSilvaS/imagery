@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"imagery/concurrent"
 	"imagery/files"
+	"imagery/transformations"
 )
 
 func main() {
@@ -12,6 +13,6 @@ func main() {
 	if err != nil {
 		return
 	}
-	img := concurrent.Run(m)
+	img := concurrent.Run(m, transformations.TransformationOptions{MaskSize: 3, Multiplier: 1}, transformations.Negative)
 	files.Save(img)
 }
